@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "start": "npx tsc && node build/server.js",
     "dev": "nodemon src/server.ts",
-    "worker": "npx tsc && node build/processor.js"
+    "start": "node dist/server.js",
+    "worker": "node dist/processor.js",
+    "tsc": "npx tsc"
   },
   "keywords": [],
   "author": "",
