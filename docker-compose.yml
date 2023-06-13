@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: thumbnails_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - redis
+    env_file:
+      - .env-prod
+    volumes:
+      - ./uploaded:/usr/src/thumbnails/uploaded
+      - ./public:/usr/src/thumbnails/public
+
+  worker:
+    container_name: thumbnails_worker
+    build:
+      context: .
+      dockerfile: Dockerfile.worker
+    ports:
+      - 8001:8000
+    depends_on:
+      - redis
+    env_file:
+      - .env-prod
+    volumes:
+      - ./uploaded:/usr/src/thumbnails/uploaded
+      - ./public:/usr/src/thumbnails/public
+
+  redis:
+    container_name: thumbnails_redis
+    image: redis:7.0-alpine
+    ports:
+      - '7963:6379'
+    command: ["redis-server", "--bind", "redis", "--port", "7963"]
+
