@@ -28,7 +28,7 @@ queue_1.imageProcessingQueue.process(async (job, done) => {
             counter++;
         }
         ;
-        console.log(`Completed job: ${job.name}`);
+        console.log(`Completed job: ${job.id}`);
     }
     catch (error) {
         console.log(`Processing failed for job ${job.id}:`, error);
